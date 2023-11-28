@@ -15,6 +15,8 @@ class MoviePreviewViewController: UIViewController {
     
     private var movies: [MovieItem] = [MovieItem]()
     
+    private var model: MoviePreviewViewModel?
+    
     private let movieLabel: UILabel = {
        let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .bold)
@@ -63,6 +65,11 @@ class MoviePreviewViewController: UIViewController {
 extension MoviePreviewViewController {
     @objc private func handleFavoriteButton() {
         print("Favorite")
+        guard let movieID = model?.youtubeView.id else {
+                    return
+        }
+
+        print(movieID)
     }
 }
 //MARK: - Helpers
@@ -129,6 +136,7 @@ extension MoviePreviewViewController {
         
     }
     func configure(with model: MoviePreviewViewModel) {
+        self.model = model
         movieLabel.text = model.movie
         overviewLabel.text = model.movieOverview
         
